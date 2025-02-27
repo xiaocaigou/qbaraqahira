@@ -9,8 +9,14 @@ To load models in 4bits with transformers and bitsandbytes, you have to install 
 pip install -U -r requirements.txt
 ```
 
-Change the `bnb.py` in your peft path(python path/peft/tuners/lora/bnb.py) with the new one.
-Change the `layer.py` in your peft path(python path/peft/tuners/lora/layer.py) with the new one.
+## Fine-tune
+
+1. Change the `bnb.py` in your peft path(python path/peft/tuners/lora/bnb.py) with the new one.
+
+2. Change the `layer.py` in your peft path(python path/peft/tuners/lora/layer.py) with the new one.
+
+## Merge
+Use the `merge.py` to merge the base_model and the adapter
 
 ## Acknowledgements
 Our code is based on [QLoRA](https://github.com/artidoro/qlora)
