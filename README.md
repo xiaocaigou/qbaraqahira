@@ -7,7 +7,7 @@ To load models in 4bits with transformers and bitsandbytes, you have to install 
 
 ```bash
 pip install -U -r requirements.txt
-exit
+```exit
 
 Change the `bnb.py` in your peft path(python path/peft/tuners/lora/bnb.py) with the new one.
 Change the `layer.py` in your peft path(python path/peft/tuners/lora/layer.py) with the new one.
