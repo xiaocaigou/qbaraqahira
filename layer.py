@@ -91,11 +91,11 @@ class LoraLayer(BaseTunerLayer):
         self.lora_dropout.update(nn.ModuleDict({adapter_name: lora_dropout_layer}))
         # Actual trainable parameters
         if r > 0:
-            # qbara
+            # qblra, lamda=2 for llama
             self.lora_A[adapter_name] = nn.Linear(int(self.in_features / 2), int(r * 2), bias=False)
             self.lora_B[adapter_name] = nn.Linear(int(r * 2), int(self.out_features / 2), bias=False) 
             self.scaling[adapter_name] = lora_alpha / r
-            # qahira
+            # qablora, lamda_1,lamda_2 = 4,8 for llama 
             self.lora_A[adapter_name] = nn.Linear(int(self.in_features / 4), int(self.out_features / 8), bias=False)
             # self.lora_B[adapter_name] = nn.Linear(int(r * 2), int(self.out_features / 2), bias=False) 
             self.scaling[adapter_name] = lora_alpha / r
