@@ -213,9 +213,9 @@ if is_bnb_4bit_available():
             # self.lora_default_A_scale = torch.nn.Parameter(torch.zeros([1], dtype=self.lora_A.default.weight.dtype).to(self.base_layer.weight.device), requires_grad=True)
             # self.lora_default_B_scale = torch.nn.Parameter(torch.zeros([1], dtype=self.lora_A.default.weight.dtype).to(self.base_layer.weight.device), requires_grad=True)
             
-            # our q-bara
+            # our q-blora
             self.our_pool = torch.nn.AvgPool1d(2)    
-            # our qa-hira
+            # our qa-blora
             self.our_pool = torch.nn.AvgPool1d(4)
                    
 
@@ -333,10 +333,10 @@ if is_bnb_4bit_available():
                     # output = self.lora_A[self.active_adapter[0]](self.lora_dropout[self.active_adapter[0]](x)) + self.lora_default_A_scale * x.reshape([_ for _ in x.shape[:-1]] + [self.lora_A[self.active_adapter[0]].out_features] + [-1]).mean(dim=-1)
                     # output = (self.lora_B[self.active_adapter[0]](output).reshape([_ for _ in output.shape] + [-1]) + self.lora_default_B_scale * output.unsqueeze(-1)).reshape([_ for _ in output.shape[:-1]] + [-1])
 
-                    # our qbara
+                    # our qblora, lamda=2 for llama
                     output = lora_B(lora_A(dropout(self.our_pool(x))))
                     output = torch.repeat_interleave(output,2,dim=2)
-                    # our qahira   
+                    # our qablora, lamda_1,lamda_2 = 4,8 for llama   
                     # output = lora_A(dropout(self.our_pool(x)))
                     # output = torch.repeat_interleave(output,8,dim=2)
 
